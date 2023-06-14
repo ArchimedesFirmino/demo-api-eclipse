@@ -1,4 +1,4 @@
-package com.archimedes.demoapieclipse.users;
+package com.archimedes.demoapieclipse.person;
 
 import java.util.List;
 
@@ -14,46 +14,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/person")
+public class PersonController {
 
 	@Autowired
-	UserRepository userRepository;
+	PersonRepository personRepository;
 
 	@GetMapping
-	public List<User> getAll() {
-		return userRepository.findAll();
+	public List<Person> getAll() {
+		return personRepository.findAll();
 	}
 
 	@GetMapping(path = "/{id}")
-	public User getOne(@PathVariable Long id) {
-		if (userRepository.existsById(id)) {
-			return userRepository.findById(id).get();
+	public Person getOne(@PathVariable Long id) {
+		if (personRepository.existsById(id)) {
+			return personRepository.findById(id).get();
 		}
 		return null;
 	}
 
 	@PostMapping
-	public User post(@RequestBody User user) {
-		return userRepository.save(user);
+	public Person post(@RequestBody Person person) {
+		return personRepository.save(person);
 	}
 
 	@DeleteMapping(path = "/{id}", produces = "application/json")
 	public String delete(@PathVariable Long id) {
-		if (userRepository.existsById(id)) {
-			userRepository.deleteById(id);
+		if (personRepository.existsById(id)) {
+			personRepository.deleteById(id);
 			return "{\"status\" : \"deleted\" }";
 		}
 		return "{\"status\" : \"error\" }";
 	}
 	
 	@PutMapping(path = "{id}")
-	public User put(@PathVariable Long id, @RequestBody User user) {
+	public Person put(@PathVariable Long id, @RequestBody Person person) {
 		return null;
 	}
 	
 	@PatchMapping(path = "{id}")
-	public User patch(@PathVariable Long id, @RequestBody User user) {
+	public Person patch(@PathVariable Long id, @RequestBody Person person) {
 		return null;
 	}
 }
