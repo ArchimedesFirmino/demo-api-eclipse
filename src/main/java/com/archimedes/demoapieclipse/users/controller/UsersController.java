@@ -21,42 +21,42 @@ import com.archimedes.demoapieclipse.users.repository.UsersRepository;
 public class UsersController {
 
 	@Autowired
-	UsersRepository UsersRepository;
+	UsersRepository usersRepository;
 
 	@GetMapping
 	public List<Users> getAll() {
-		return UsersRepository.findAll();
+		return usersRepository.findAll();
 	}
 
 	@GetMapping(path = "/{id}")
 	public Users getOne(@PathVariable Long id) {
-		if (UsersRepository.existsById(id)) {
-			return UsersRepository.findById(id).get();
+		if (usersRepository.existsById(id)) {
+			return usersRepository.findById(id).get();
 		}
 		return null;
 	}
 
 	@PostMapping
-	public Users post(@RequestBody Users Users) {
-		return UsersRepository.save(Users);
+	public Users post(@RequestBody Users users) {
+		return usersRepository.save(users);
 	}
 
 	@DeleteMapping(path = "/{id}", produces = "application/json")
 	public String delete(@PathVariable Long id) {
-		if (UsersRepository.existsById(id)) {
-			UsersRepository.deleteById(id);
+		if (usersRepository.existsById(id)) {
+			usersRepository.deleteById(id);
 			return "{\"status\" : \"deleted\" }";
 		}
 		return "{\"status\" : \"error\" }";
 	}
 	
 	@PutMapping(path = "{id}")
-	public Users put(@PathVariable Long id, @RequestBody Users Users) {
+	public Users put(@PathVariable Long id, @RequestBody Users users) {
 		return null;
 	}
 	
 	@PatchMapping(path = "{id}")
-	public Users patch(@PathVariable Long id, @RequestBody Users Users) {
+	public Users patch(@PathVariable Long id, @RequestBody Users users) {
 		return null;
 	}
 }
