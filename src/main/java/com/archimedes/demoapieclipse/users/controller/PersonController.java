@@ -1,4 +1,4 @@
-package com.archimedes.demoapieclipse;
+package com.archimedes.demoapieclipse.users.controller;
 
 import java.util.List;
 
@@ -13,47 +13,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.archimedes.demoapieclipse.users.model.Person;
+import com.archimedes.demoapieclipse.users.repository.PersonRepository;
+
 @RestController
-@RequestMapping("/trecos")
-public class TrecoController {
+@RequestMapping("/person")
+public class PersonController {
 
 	@Autowired
-	TrecoRepository trecoRepository;
+	PersonRepository personRepository;
 
 	@GetMapping
-	public List<Treco> getAll() {
-		return trecoRepository.findAll();
+	public List<Person> getAll() {
+		return personRepository.findAll();
 	}
 
 	@GetMapping(path = "/{id}")
-	public Treco getOne(@PathVariable Long id) {
-		if (trecoRepository.existsById(id)) {
-			return trecoRepository.findById(id).get();
+	public Person getOne(@PathVariable Long id) {
+		if (personRepository.existsById(id)) {
+			return personRepository.findById(id).get();
 		}
 		return null;
 	}
 
 	@PostMapping
-	public Treco post(@RequestBody Treco treco) {
-		return trecoRepository.save(treco);
+	public Person post(@RequestBody Person person) {
+		return personRepository.save(person);
 	}
 
 	@DeleteMapping(path = "/{id}", produces = "application/json")
 	public String delete(@PathVariable Long id) {
-		if (trecoRepository.existsById(id)) {
-			trecoRepository.deleteById(id);
+		if (personRepository.existsById(id)) {
+			personRepository.deleteById(id);
 			return "{\"status\" : \"deleted\" }";
 		}
 		return "{\"status\" : \"error\" }";
 	}
 	
 	@PutMapping(path = "{id}")
-	public Treco put(@PathVariable Long id, @RequestBody Treco treco) {
+	public Person put(@PathVariable Long id, @RequestBody Person person) {
 		return null;
 	}
 	
 	@PatchMapping(path = "{id}")
-	public Treco patch(@PathVariable Long id, @RequestBody Treco treco) {
+	public Person patch(@PathVariable Long id, @RequestBody Person person) {
 		return null;
 	}
 }
