@@ -1,4 +1,4 @@
-package com.archimedes.demoapieclipse.users;
+package com.archimedes.demoapieclipse.users.controller;
 
 import java.util.List;
 
@@ -13,47 +13,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.archimedes.demoapieclipse.users.model.Users;
+import com.archimedes.demoapieclipse.users.repository.UsersRepository;
+
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UsersController {
 
 	@Autowired
-	UserRepository userRepository;
+	UsersRepository UsersRepository;
 
 	@GetMapping
-	public List<User> getAll() {
-		return userRepository.findAll();
+	public List<Users> getAll() {
+		return UsersRepository.findAll();
 	}
 
 	@GetMapping(path = "/{id}")
-	public User getOne(@PathVariable Long id) {
-		if (userRepository.existsById(id)) {
-			return userRepository.findById(id).get();
+	public Users getOne(@PathVariable Long id) {
+		if (UsersRepository.existsById(id)) {
+			return UsersRepository.findById(id).get();
 		}
 		return null;
 	}
 
 	@PostMapping
-	public User post(@RequestBody User user) {
-		return userRepository.save(user);
+	public Users post(@RequestBody Users Users) {
+		return UsersRepository.save(Users);
 	}
 
 	@DeleteMapping(path = "/{id}", produces = "application/json")
 	public String delete(@PathVariable Long id) {
-		if (userRepository.existsById(id)) {
-			userRepository.deleteById(id);
+		if (UsersRepository.existsById(id)) {
+			UsersRepository.deleteById(id);
 			return "{\"status\" : \"deleted\" }";
 		}
 		return "{\"status\" : \"error\" }";
 	}
 	
 	@PutMapping(path = "{id}")
-	public User put(@PathVariable Long id, @RequestBody User user) {
+	public Users put(@PathVariable Long id, @RequestBody Users Users) {
 		return null;
 	}
 	
 	@PatchMapping(path = "{id}")
-	public User patch(@PathVariable Long id, @RequestBody User user) {
+	public Users patch(@PathVariable Long id, @RequestBody Users Users) {
 		return null;
 	}
 }

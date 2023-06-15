@@ -1,4 +1,4 @@
-package com.archimedes.demoapieclipse;
+package com.archimedes.demoapieclipse.treco.controller;
 
 import java.util.List;
 
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.archimedes.demoapieclipse.treco.model.Treco;
+import com.archimedes.demoapieclipse.treco.repository.TrecoRepository;
 
 @RestController
 @RequestMapping("/trecos")
